@@ -19,7 +19,7 @@
 
             <div class="add-user-card">
                 <div class="input-group row">
-                    <input type="text" id="username-input" placeholder="Enter a name - Tap or click on card to reveal delete button." autocomplete="off" />
+                    <input type="text" id="username-input" placeholder="Enter a name: " autocomplete="off" />
                     <button id="add-btn" class="btn primary">Add</button>
                 </div>
             </div>
@@ -75,7 +75,7 @@
             if (!countersList) return;
 
             if (users.length === 0) {
-                countersList.innerHTML = '<div class="empty-state">No names added yet.</div>'; return;
+                countersList.innerHTML = '<div class="empty-state">No names added yet. Tap or click on card to reveal delete button.</div>'; return;
             }
 
             countersList.innerHTML = '';
