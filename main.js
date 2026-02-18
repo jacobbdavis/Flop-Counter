@@ -62,7 +62,7 @@ function updateCounter(userId, change) {
 
 function renderUsers() {
     if (users.length === 0) {
-        countersList.innerHTML = '<div class="empty-state">No users added yet. Add a user to start tracking flops!</div>';
+        countersList.innerHTML = '<div class="empty-state">No users added yet.</div>';
         return;
     }
 
