@@ -1,6 +1,6 @@
 # Flop-Counter
 
-A premium static web application for tracking flops.
+A static web application for tracking flops.
 
 ## Features
 - **Modern UI**: Dark mode, glassmorphism, and smooth animations.
