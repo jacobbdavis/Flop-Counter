@@ -8,9 +8,27 @@ const countersList = document.getElementById('counters-list');
 let users = [];
 
 // Functions
+// Functions
 function init() {
+    loadFromStorage();
     usernameInput.focus();
     renderUsers();
+}
+
+function saveToStorage() {
+    localStorage.setItem('flopCounterUsers', JSON.stringify(users));
+}
+
+function loadFromStorage() {
+    const storedUsers = localStorage.getItem('flopCounterUsers');
+    if (storedUsers) {
+        try {
+            users = JSON.parse(storedUsers);
+        } catch (e) {
+            console.error('Failed to parse users from storage', e);
+            users = [];
+        }
+    }
 }
 
 function addUser() {
@@ -22,6 +40,7 @@ function addUser() {
             count: 0
         };
         users.push(newUser);
+        saveToStorage(); // Save after adding
         usernameInput.value = '';
         renderUsers();
         usernameInput.focus();
@@ -36,6 +55,7 @@ function updateCounter(userId, change) {
     const user = users.find(u => u.id === userId);
     if (user) {
         user.count += change;
+        saveToStorage(); // Save after update
         renderUserCard(user); // Re-render just this card or update value
     }
 }
@@ -46,9 +66,6 @@ function renderUsers() {
         return;
     }
 
-    // Efficiently update DOM: In a real framework we'd diff, here we'll just clear and rebuild for simplicity
-    // preventing complete redraws if possible would be better but for this scope it's fine.
-    // Actually, to keep it smooth, let's just clear and rebuild.
     countersList.innerHTML = '';
     users.forEach(user => {
         const card = document.createElement('div');
@@ -104,14 +121,15 @@ function deleteUser(userId) {
         card.style.opacity = '0';
         setTimeout(() => {
             users = users.filter(u => u.id !== userId);
+            saveToStorage(); // Save after delete
             renderUsers();
         }, 300);
     } else {
         users = users.filter(u => u.id !== userId);
+        saveToStorage(); // Save after delete
         renderUsers();
     }
 }
-
 
 // Event Listeners
 addBtn.addEventListener('click', addUser);
