@@ -19,6 +19,7 @@
     margin: 0;
     padding: 0;
     touch-action: pan-x pan-y;
+    user-select: none;
 }
 
 body {
@@ -207,7 +208,6 @@ input:focus {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    user-select: none;
 }
 
 .counter-controls {
